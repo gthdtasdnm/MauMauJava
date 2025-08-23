@@ -19,7 +19,7 @@ public class Card {
 
     @Override 
     public String toString() {
-        return suit + "of"+  rank; 
+        return suit + " of "+  rank; 
     }
 }
     

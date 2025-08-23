@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class Deck {
     
 
-    public final ArrayList<Card> deck = new ArrayList<>(); 
+    public ArrayList<Card> deck = new ArrayList<>(); 
 
 
     public Deck(){
@@ -16,12 +16,7 @@ public class Deck {
         }
     }
 
-    
-
-    
-
-
-
-
-
+    public ArrayList<Card> getDeck(){
+        return new ArrayList<>(deck); 
+    }
 }
