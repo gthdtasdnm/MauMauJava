@@ -1,5 +1,6 @@
 package Deck;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Deck {
@@ -14,9 +15,14 @@ public class Deck {
                 deck.add(new Card(rank, suit)); 
             }
         }
+        Collections.shuffle(deck);
     }
 
     public ArrayList<Card> getDeck(){
         return new ArrayList<>(deck); 
+    }
+
+    public Card takeOne() {
+        return deck.remove(0); 
     }
 }
