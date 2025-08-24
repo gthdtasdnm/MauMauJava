@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Deck.Card;
 import Deck.Deck;
+import Factory.PlayerFactory;
 import Player.Player;
 
 
@@ -12,51 +13,21 @@ public class Game_Init extends MauMauState {
     private Scanner scanner = new Scanner(System.in);
     private boolean finished = false;
     private Deck deck = new Deck();
+    PlayerFactory playerFactory = new PlayerFactory();
 
     public void enter(){
         System.out.println("Willkommen zum MauMau Spiel");
-        System.out.println("Gib die Namen der Spieler ein, die mitspielen.");
-        System.out.println("Wenn du fertig bist, gibt \"exit\" ein");
-        update(); 
-
+        System.out.println("Gib die Namen von 4 Spielern ein");
+        update();
     } 
 
     public void update(){
-        if (finished) return; // falls beendet
-        
-
-        System.out.print("Spielername: ");
-        String input = scanner.nextLine().trim();
-
-        if (input.equalsIgnoreCase("exit")) { 
-            if(players.size() >= 1 ) {
-                finished = true;}  
-                System.out.println("Spieleranzahl: " + players.size());
-                System.out.println("Spieler: " + players);
-                exit();  
-                return;
-            }
-            else{ 
-                finished = false;
-            }
-
-
-
-
-        if (!input.isEmpty()) {     // spiler wird erstellt wenn eine Engabe vorliegt 
-            ArrayList<Card> hand = new ArrayList<>();
-            for(int i = 0; i <= 4; i++){
-                hand.add(deck.takeOne());
-            }
-            players.add(new Player(input,hand));
-            System.out.println("Spieler hinzugefügt: " + input);    
-        } else {            // bei keiner Eingabe wirde nach einen name gefragt 
-            System.out.println("Bitte einen gültigen Namen eingeben!");
-        } 
-        if(players.size() >= 4){ // Wenn 4 es Spiler sind gehen wir raus 
+        if(players.size() < 4){
+            players.add(playerFactory.orderPlayer(deck));
+        }else{
+            exit();
             return;
         }
-
 
         // Nach jeder Eingabe rekursiv wieder update() aufrufen
         update();
@@ -64,6 +35,7 @@ public class Game_Init extends MauMauState {
 
     public void exit(){
         System.out.println("Game_Init verlassen");
+        System.out.println(players);
     }
 
     public ArrayList<Player> getPlayers() {

@@ -1,16 +1,17 @@
 package Player;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import Deck.Card;
+import Deck.Deck;
 
 public class Player {
     String name; 
     ArrayList<Card> hand = new ArrayList<>(); 
 
 
-    public Player(String name, ArrayList<Card> hand){
-        this.name = name;
-        this.hand = hand;
+    public Player(){
     }
 
 
@@ -39,9 +40,23 @@ public class Player {
         if (index != -1) {
             return hand.remove(index);
         }
-        return null; // if ther is no card 
-     
+        return null; // if ther is no card
     }
 
+    public void init(Deck deck){
+        Scanner scanner = new Scanner(System.in);
+
+        // Spielername abfragen
+        System.out.print("Bitte gib deinen Namen ein: ");
+        name = scanner.nextLine();
+
+        // z. B. 5 Karten ziehen
+        for (int i = 0; i < 5; i++) {
+            takeCard(deck.takeOne());
+        }
+
+        System.out.println("Spieler \"" + name + "\" wurde erstellt.");
+        System.out.println("Handkarten: " + hand);
+    }
 
 }
