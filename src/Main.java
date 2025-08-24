@@ -13,6 +13,5 @@ public class Main {
         MauMauState start = new Game_Init(); 
         start.enter(); 
 
-
     }
 }
